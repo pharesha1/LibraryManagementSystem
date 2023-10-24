@@ -1,6 +1,6 @@
 # LibraryManagementSystem
 
-To run the web app simply execute the mvnw file.
+To run the web app simply execute the mvnw file and create mysql database with libraryschema.sql.
 
 For this project, I used Java Spring Boot, Spring Security, Hibernate, MySQL as a database, Thymeleaf and Bootstrap for User Interface
 
