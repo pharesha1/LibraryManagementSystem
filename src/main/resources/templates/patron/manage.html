@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/}">Library Management System</a>
+    <div class="navbar-nav ml-auto">
+        <a class="nav-link disabled text-dark">Role: <span sec:authentication="principal.authorities"></span></a>
+        <a class="nav-link disabled text-dark">User: <span sec:authentication="principal.username"></span></a>
+        <form action = "#" th:action = "@{/logout}" method="post">
+            <button type="submit" class="btn btn-link nav-link">Log Out</button>
+        </form>
+    </div>
+</nav>
+<div class="container mt-5">
+    <h2 class="pb-5">Patron Management</h2>
+    <div class="mb-3">
+        <div class="col-md-4">
+            <a class="btn btn-success" th:href="@{/patrons/createForm}">Add a Patron</a>
+        </div>
+    </div>
+    <h3>Item List</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each = "tempPatron : ${patronList}">
+            <td th:text = "${tempPatron.firstName}"></td>
+            <td th:text = "${tempPatron.lastName}"></td>
+            <td th:text = "${tempPatron.phoneNumber}"></td>
+            <td th:text = "${tempPatron.email}"></td>
+            <td>
+                <a th:href = "@{/patrons/updateForm(patronId = ${tempPatron.patronId})}" class="btn btn-info">
+                    Update</a>
+                <a th:href = "@{/patrons/delete(patronId = ${tempPatron.patronId})}" class="btn btn-danger">
+                    Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
